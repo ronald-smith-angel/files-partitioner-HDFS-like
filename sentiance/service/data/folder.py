@@ -1,18 +1,17 @@
 from sentiance.service.utils.file_utils import FileUtils
-
+import numpy as np
 
 class Folder(object):
-    def __init__(self, max_size_file, path, init_data, total_size, partitions=None):
+    def __init__(self, max_size_file, path, total_size, partitions=None):
         if partitions is None:
             partitions = {}
         self.max_size_file = max_size_file
         self.path = path
-        self.init_data = init_data
         self.partitions = partitions
         self.total_size = total_size
 
     def partition(self):
-        self.partitions = self.get_data_partitions(self.init_data, 0)
+        self.partitions = self.get_data_partitions(self.partitions_size())
         return self.partitions
 
     def repartition(self, new_data):
@@ -30,10 +29,10 @@ class Folder(object):
         self.partition(new_data)
 
     def partitions_size(self):
-        len(self.partitions)
+        return np.ceil(self.total_size / float(self.max_size_file))
 
-    def get_data_partitions(self, init_data, init_index):
-        file_chunks = FileUtils.get_file_chunks(init_data, init_index, self.max_size_file)
+    def get_data_partitions(self, number_partitions):
+        file_chunks = FileUtils.get_file_chunks(number_partitions, self.max_size_file)
         return FileUtils.map_list_to_dic(file_chunks)
 
     def flush(self):
