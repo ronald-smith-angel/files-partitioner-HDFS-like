@@ -18,7 +18,7 @@ class FileUtils(object):
             new_file.write(file_line + '\n')
         data_file = new_file.read()
         new_file.close()
-        data_file
+        return data_file
 
     @staticmethod
     def save_data_to_file(file_data, output_path):
@@ -49,5 +49,5 @@ class FileUtils(object):
     @staticmethod
     def append_to_back_up_dictionary(new_back_data):
         with open(FileUtils.BACK_DICT_PATH, 'a') as f:
-            json.dump(new_back_data, file)
+            json.dump(new_back_data, f)
             f.write(os.linesep)
