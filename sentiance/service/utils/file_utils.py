@@ -28,11 +28,11 @@ class FileUtils(object):
 
     @staticmethod
     def get_file_chunks(init_data, init_index, max_size_file):
-        return (init_data[i:i + max_size_file] for i in xrange(init_index, len(init_data), max_size_file))
+        return (init_data[i:i + max_size_file] for i in range(init_index, len(init_data), max_size_file))
 
     @staticmethod
     def map_list_to_dic(input_list):
-        return dict((i, value) for i, value in enumerate(input_list))
+        return dict((i + 1, value) for i, value in enumerate(input_list))
 
     @staticmethod
     def backup_folder(input_folder, output_folder):
