@@ -32,9 +32,9 @@ As Suggestions if the information becomes larger we could change:
 	- Create your own distributed file system.
 * Use the api in s3 or hdfs to create backups safely.
 # Data processing:
-Process data in parallel reading from a distributed file system (1 partition - 1 slot)
-	* Use spark or MR to process data in batch.
-	* Use a custom python library to process data in parallel: python multiprocessing lib.
+* Process data in parallel reading from a distributed file system (1 partition - 1 slot)
+	- Use spark or MR to process data in batch.
+	- Use a custom python library to process data in parallel: python multiprocessing lib.
 
 
 
@@ -43,7 +43,7 @@ Process data in parallel reading from a distributed file system (1 partition - 1
 
 * Run Unit Test: 
 
-	- py folder_test.py
+	```py folder_test.py```
 
 * Run Files Generator
 
