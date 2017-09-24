@@ -4,7 +4,7 @@ This project has some functions to repartion files in chunks using a couple of a
 
 ### 1-Core approach ###
 
-This is the general approach totally implemented and validating using the test in: 
+This is the general approach totally implemented and validated using the test in: 
 
 ```sentiance.service.FolderTest```
 
