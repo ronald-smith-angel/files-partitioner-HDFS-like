@@ -1,4 +1,4 @@
-# README #
+# FILES PARTITIONER #
 
 This project has some functions to repartion files in disk in chunks using a couple of approaches:
 
@@ -6,15 +6,15 @@ This project has some functions to repartion files in disk in chunks using a cou
 
 This is the general approach totally implemented and validating using the test in: 
 
-### sentiance.service.FolderTest ###
+```sentiance.service.FolderTest```
 
-This approach basically manages the Master Data Frame Information as json serialized information in disk.
+This approach basically manages the Master DataSet Information as json serialized information in disk.
 
 Is important to note that this json does not contain the files bytes but contains a dictionary with the folders and partitions paths and metadata.
 
-In the Partitioner class you could find MAX_DISK_ALLOCATION that is maximum allocated value for all the values in disk. 
+In the Partitioner class you could find ```MAX_DISK_ALLOCATION``` that is maximum allocated value for all the values in disk. 
 
-If the information becomes larger and does not match MAX_DISK_ALLOCATION the program will take the parallel strategy (not implemented yet).
+If the information becomes larger and does not match ```MAX_DISK_ALLOCATION``` the program will take the parallel strategy (not implemented yet).
 
 ### Parallel Strategy ###
 
@@ -47,13 +47,13 @@ As Suggestions if the information becomes larger we could change:
 
 * Run Files Generator
 
-	- py data_generation.py  {path_ds} {max_value_file} {str_folders}
+	```py data_generation.py  {path_ds} {max_value_file} {str_folders}```
 
 * Run Files Update:
 	
-	- py data_update.py  {path_ds} {str_folders}
+	```py data_update.py  {path_ds} {str_folders}```
 	
 * Run folder backup
 
-	- py data_back_up.py {input_folder} {output_folder}
+	```py data_back_up.py {input_folder} {output_folder}```
 
