@@ -1,13 +1,14 @@
-import os
 import errno
-import string
-import random
-import datetime
 import json
-import numpy as np
-from sentiance.service.utils.general_strategy import GeneralStrategy
-from random import randint
+import os
+import random
+import string
 from distutils.dir_util import copy_tree, remove_tree
+from random import randint
+
+import numpy as np
+
+from sentiance.service.utils.general_strategy import GeneralStrategy
 
 
 class FolderHelper(GeneralStrategy):
@@ -58,7 +59,10 @@ class FolderHelper(GeneralStrategy):
 
     @staticmethod
     def path_name(path_str):
-        return path_str.rsplit('/', 1)[-1]
+        if len(path_str) > 5 and ('/' in path_str):
+            return path_str.rsplit('/', 1)[-1]
+        else:
+            return path_str
 
     def partition(self, max_size_file, max_size_folder, folder_path, folder_name, init_index=0):
         """  This method creates a file with random content per partition and add that to dictionary using as key:
@@ -84,7 +88,6 @@ class FolderHelper(GeneralStrategy):
             del partition_content[:]
         return partition_dict
 
-
     def repartition(self, max_size_file, max_size_folder, folder_path, folder_name, added_bytes, current_partitions):
         """  This method modifies the chunk in a folder. First of all add bytes the the reminded space in the last
             partition and finally the generates new partitions with reminded bytes
@@ -101,14 +104,12 @@ class FolderHelper(GeneralStrategy):
         FolderHelper.save_data_to_file(reminded_content, out_put_path)
 
         # Creating new partitions
-        # TODO: do not modify current partitions here to remove side effect and return last partition and new one
         new_partitions = {}
         if bytes_reminded > 0:
             new_partitions = self.partition(max_size_file, bytes_reminded, folder_path, folder_name,
-                                                       len(current_partitions))
+                                            len(current_partitions))
         current_partitions.update(new_partitions)
         return current_partitions
-
 
     @staticmethod
     def map_list_to_dic(input_list):
@@ -122,10 +123,6 @@ class FolderHelper(GeneralStrategy):
 
     @staticmethod
     def remove_folder(folder_name):
-        #current_ts = datetime.datetime.now()
-        #backup_folder = '{}back{}'.format(folder_name, current_ts)
-        #copy_tree(folder_name, backup_folder)
-        #FolderHelper.append_to_back_up_dictionary(dict(folder_name, (current_ts, backup_folder)))
         remove_tree(folder_name)
 
     @staticmethod
@@ -133,3 +130,14 @@ class FolderHelper(GeneralStrategy):
         with open(FolderHelper.BACKUPS_CACHE_FILE, 'a') as f:
             json.dump(new_back_data, f)
             f.write(os.linesep)
+
+    @staticmethod
+    def save_ds_as_json(ds_file, ds_name):
+        with open(ds_name, 'w') as f:
+            json.dump(ds_file, f)
+
+    @staticmethod
+    def read_from_json(file_name):
+        with open(file_name) as json_data:
+            data = json.load(json_data)
+        return data

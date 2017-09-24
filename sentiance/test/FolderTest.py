@@ -1,6 +1,7 @@
-import unittest
 import os
+import unittest
 from random import randint
+
 from sentiance.service.utils.folder_helper import FolderHelper
 
 
@@ -19,7 +20,6 @@ class FolderTest(unittest.TestCase):
     EXPECTED_MODIFIED_LAST_SIZE = 300
     original_data_chunks = {}
 
-
     @classmethod
     def setUpClass(cls):
         current_directory = os.getcwd()
@@ -34,9 +34,9 @@ class FolderTest(unittest.TestCase):
         # Testing number of chunks created
         folder_helper = FolderHelper()
         data_chunks = folder_helper.partition(FolderTest.MAX_SIZE_FILE,
-                                                   FolderTest.MAX_SIZE_TOTAL_FOLDER,
-                                                   FolderTest.INPUT_FILE_NAME,
-                                                   FolderTest.NAME_INPUT_FOLDER)
+                                              FolderTest.MAX_SIZE_TOTAL_FOLDER,
+                                              FolderTest.INPUT_FILE_NAME,
+                                              FolderTest.NAME_INPUT_FOLDER)
         number_chunks = len(data_chunks)
         self.assertEqual(number_chunks, FolderHelper.partitions_size(FolderTest.MAX_SIZE_TOTAL_FOLDER,
 
@@ -61,11 +61,11 @@ class FolderTest(unittest.TestCase):
         new_number_chunks = FolderHelper.partitions_size(folder_modified_size, FolderTest.MAX_SIZE_FILE)
 
         modified_data_chunks = folder_helper.repartition(FolderTest.MAX_SIZE_FILE,
-                                                               FolderTest.MAX_SIZE_TOTAL_FOLDER,
-                                                               FolderTest.INPUT_FILE_NAME,
-                                                               FolderTest.NAME_INPUT_FOLDER,
-                                                               FolderTest.ADDED_BYTES_VALUE,
-                                                               FolderTest.original_data_chunks)
+                                                         FolderTest.MAX_SIZE_TOTAL_FOLDER,
+                                                         FolderTest.INPUT_FILE_NAME,
+                                                         FolderTest.NAME_INPUT_FOLDER,
+                                                         FolderTest.ADDED_BYTES_VALUE,
+                                                         FolderTest.original_data_chunks)
         self.assertEqual(new_number_chunks, len(modified_data_chunks))
 
         # Validating size of intermediary key space
@@ -88,11 +88,9 @@ class FolderTest(unittest.TestCase):
         input_dir = current_directory + FolderTest.INPUT_BK_FILE_NAME
         output_dir = current_directory + FolderTest.OUT_PUT_BK_FILE
 
-        folder_helper.backup_folder(input_dir,
-                                   output_dir)
+        folder_helper.backup_folder(input_dir, output_dir)
         # Getting sure there are not issues with existing folder
-        folder_helper.backup_folder(input_dir,
-                                   output_dir)
+        folder_helper.backup_folder(input_dir, output_dir)
         self.assertEqual(os.path.getsize(input_dir), os.path.getsize(output_dir))
 
     @classmethod
@@ -105,11 +103,3 @@ class FolderTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
-
-
-
-
-
-
-

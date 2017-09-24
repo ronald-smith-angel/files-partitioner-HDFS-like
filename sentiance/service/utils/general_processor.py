@@ -8,17 +8,16 @@ class GeneralProcessor(object):
         self._strategy = strategy
 
     def partition(self, folder):
-        self._strategy.get_file_chunks(folder.max_size_file, folder.total_size, folder.path, folder.name)
+        return self._strategy.partition(folder.max_size_file, folder.total_size, folder.path, folder.name)
 
     def repartition(self, folder, added_bytes):
-        self._strategy.modify_file_chunks(folder.max_size_file,
-                                           folder.total_size,
-                                           folder.path,
-                                           folder.name,
-                                           added_bytes,
-                                           folder.current_partitions)
+        folder.total_size += added_bytes
+        return self._strategy.repartition(folder.max_size_file,
+                                          folder.total_size,
+                                          folder.path,
+                                          folder.name,
+                                          added_bytes,
+                                          folder.partitions)
 
-    def backup_folder(self,input_folder, output_folder):
+    def backup_folder(self, input_folder, output_folder):
         self._strategy.backup_folder(input_folder, output_folder)
-
-
