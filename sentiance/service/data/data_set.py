@@ -1,13 +1,7 @@
-from sentiance.service.utils.file_utils import FileUtils
-
-
 class DataSet(object):
-    def __init__(self, name, path, folder_list=None):
-        self.name = name
-        self.folder_list = folder_list
+    def __init__(self, path, folder_list=None):
+        if folder_list is None:
+            folder_list = {}
         self.path = path
+        self.folder_list = folder_list
 
-    def save_all(self):
-        for folder in self.folder_list:
-            for key, value in folder.partitions.items():
-                FileUtils.save_data_to_file(value, "file" + key)
