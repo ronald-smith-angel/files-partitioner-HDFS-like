@@ -1,6 +1,6 @@
 # FILES PARTITIONER #
 
-This project has some functions to repartion files in disk in chunks using a couple of approaches:
+This project has some functions to repartion files in chunks using a couple of approaches:
 
 ### 1-Core approach ###
 
