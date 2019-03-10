@@ -1,4 +1,4 @@
-# FILES PARTITIONER #
+# Files Partitioner (HDFS Study Purposes) #
 
 This project has some functions to repartion files in chunks using randomly generated data. This an example created to 
 understand locally the HDFS (first version) version main concepts: block size, metadata store and repartition. 
