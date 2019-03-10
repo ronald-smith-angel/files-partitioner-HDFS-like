@@ -1,5 +1,5 @@
 import sys
-from sentiance.service.partitioner import Partitioner
+from sample.service.partitioner import Partitioner
 
 # Parsing Params
 program_args = sys.argv

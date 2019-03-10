@@ -2,7 +2,7 @@ import os
 import unittest
 from random import randint
 
-from sentiance.service.utils.folder_helper import FolderHelper
+from sample.service.utils.folder_helper import FolderHelper
 
 
 class FolderTest(unittest.TestCase):

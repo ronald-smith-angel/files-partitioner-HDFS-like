@@ -8,11 +8,10 @@ from random import randint
 
 import numpy as np
 
-from sentiance.service.utils.general_strategy import GeneralStrategy
+from sample.service.utils.general_strategy import GeneralStrategy
 
 
 class FolderHelper(GeneralStrategy):
-    # TODO: inject a config interface reading from an external json
     MIN_CHARS_STRINGS = 2
     MAX_CHARS_STRINGS = 20
     FILE_PARTITION_NAME = "file"
@@ -23,8 +22,6 @@ class FolderHelper(GeneralStrategy):
         """  This method generates random content for a file with size:file_size. Basically iterates until the max size is
              reached. Therefore, returns a list of random generated ascii_letters lines.
         """
-        """TODO: parallel=True use a framework to produce to shards(kinesis like) and have 1+ core running producers.
-         from multiprocessing import Process"""
         lines = []
         current_size = 0
         while current_size < max_file_size:
@@ -83,8 +80,6 @@ class FolderHelper(GeneralStrategy):
             FolderHelper.save_data_to_file(partition_content, out_put_path)
             partition_dict[folder_name + file_index_name] = (out_put_path, size_content)
             current_space_folder += size_content
-            # cleaning memory
-            # TODO: use a better approach using a gc strategy
             del partition_content[:]
         return partition_dict
 

@@ -1,4 +1,4 @@
-from sentiance.service.utils.general_strategy import GeneralStrategy
+from sample.service.utils.general_strategy import GeneralStrategy
 from multiprocessing import Process
 import boto
 import boto.s3.connection
